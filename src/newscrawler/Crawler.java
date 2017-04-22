@@ -62,7 +62,18 @@ public class Crawler {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+         
+        Crawler crawler = new Crawler();
+        
+        List<String> pagesToVisit = new LinkedList<String>();
+                    
+                    pagesToVisit.add("http://archive.prothom-alo.com/section/date/");
+                    pagesToVisit.add("http://archive.prothom-alo.com/section/date/");
+                    pagesToVisit.add("http://archive.prothom-alo.com/section/date/");
+                    pagesToVisit.add("http://archive.prothom-alo.com/section/date/");
+                    pagesToVisit.add("http://archive.prothom-alo.com/section/date/");
+                    
+                    crawler.search(pagesToVisit);
     }
     
 }
