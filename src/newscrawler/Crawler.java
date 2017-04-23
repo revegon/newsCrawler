@@ -28,7 +28,8 @@ public class Crawler {
         while(!pagesToVisit.isEmpty()){
             
             String currentUrl = pagesToVisit.remove(0);
-            CrawlConfig config = new CrawlConfig();
+//            CrawlConfig config = new CrawlConfig();
+            LATimes config = new LATimes();
             
             System.out.println("Crawling with parent link: " + currentUrl);
             
@@ -67,11 +68,8 @@ public class Crawler {
         
         List<String> pagesToVisit = new LinkedList<String>();
                     
-                    pagesToVisit.add("http://archive.prothom-alo.com/section/date/");
-                    pagesToVisit.add("http://archive.prothom-alo.com/section/date/");
-                    pagesToVisit.add("http://archive.prothom-alo.com/section/date/");
-                    pagesToVisit.add("http://archive.prothom-alo.com/section/date/");
-                    pagesToVisit.add("http://archive.prothom-alo.com/section/date/");
+                    pagesToVisit.add("http://www.latimes.com/search/dispatcher.front?target=all&spell=on&Query=bangladesh&date=04/16/2017-04/23/2017#trb_search");
+                    
                     
                     crawler.search(pagesToVisit);
     }

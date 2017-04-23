@@ -5,6 +5,8 @@
  */
 package newscrawler;
 
+import database.DBConnector;
+import database.News;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
@@ -45,14 +47,14 @@ public class LATimes {
                 return;
             }
             
-            Elements linksOnPage = htmlDocument.select("div.white a");
+            Elements linksOnPage = htmlDocument.select("div.trb_search_result");
             
             System.out.println("Found (" + linksOnPage.size() + ") links");
             
             
             for(Element link: linksOnPage){
-                
-                this.links.add(link.absUrl("href"));
+                Element atag = link.select("a.trb_search_result_title").first();
+                this.links.add(atag.absUrl("href"));
             }
             
         }catch(IOException e){
@@ -85,11 +87,23 @@ public class LATimes {
                  return;
              }
              
-            
-             String news = htmlDocument.select("p#content").text();
+//             System.out.println;
+            // get news
+             String news = htmlDocument.select("div.trb_ar_page").text();
+//             System.out.println(news);
              
-             String title = htmlDocument.select("h2.title").text();
-             String date = htmlDocument.select("p.authorInfo").text();
+             //get title
+             String title = htmlDocument.select("header.trb_ar_h").text();
+//             System.out.println(title);
+             
+             //get date
+             Element time = htmlDocument.select("div.trb_ar_dateline").first().select("time").first();
+             String date = time.attr("data-dt");
+//             System.out.println(date);
+
+             DBConnector con = new DBConnector();
+             con.dbConnection();
+             con.insert(new News(title, news, date, childLink, "LATimes"));
              
          } catch (IOException ex) {
              ex.printStackTrace();
