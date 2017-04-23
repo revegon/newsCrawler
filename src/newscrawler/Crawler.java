@@ -29,11 +29,10 @@ public class Crawler {
         List<String> pagesToVisit = new LinkedList<String>();
         
         //LATimes
-//        pagesToVisit.add("http://www.latimes.com/search/dispatcher.front?target=all&spell=on&Query=bangladesh&date=04/16/2017-04/23/2017#trb_search");         
-//        LATimes lat = new LATimes();
-//        lat.search(pagesToVisit);
-//                    
-//        pagesToVisit.clear();
+        pagesToVisit.add("http://www.latimes.com/search/dispatcher.front?target=all&spell=on&Query=bangladesh&date=04/16/2017-04/23/2017#trb_search");         
+        LATimes lat = new LATimes();
+        lat.search(pagesToVisit);
+        pagesToVisit.clear();
         
         //Times of India
         pagesToVisit.add("http://timesofindia.indiatimes.com/topic/Bangladesh/news");
@@ -41,6 +40,8 @@ public class Crawler {
         TimesOfIndia toi = new TimesOfIndia();
         toi.search(pagesToVisit);
         pagesToVisit.clear();
+        
+        //
     }
     
 }
