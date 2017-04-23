@@ -6,6 +6,7 @@
 package database;
 
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,9 +23,24 @@ public class DBConnector {
     
      private Connection conn;
     private Statement stm;
+
+    public DBConnector() {
+         try {
+             dbConnection();
+             DatabaseMetaData meta = this.conn.getMetaData();
+             ResultSet res = meta.getTables(null, null, "allnews",
+                     new String[] {"TABLE"});
+             if(!res.next()) {
+                 createTable();
+                 System.out.println("table has been created");
+             }
+         } catch (SQLException ex) {
+             Logger.getLogger(DBConnector.class.getName()).log(Level.SEVERE, null, ex);
+         }
+    }
     
     
-    public void dbConnection()
+    public final void dbConnection()
     {
         try
         {
@@ -39,13 +55,19 @@ public class DBConnector {
         }
     }
     
+    public void createTable() throws SQLException
+    {
+        String query = "create table allnews(id int primary key AUTO_INCREMENT, title varchar(50000), news varchar(50000), date varchar(50000), url varchar(50000), website varchar(100));";
+        stm.execute(query);
+    }
+    
     public void insert(News n) 
     {
         try {
             String query = "insert into allnews(title, news, date, url, website) values(\'"+n.getTitle()+"\',\'"+n.getNews()+"\',\'"+n.getDate()+"\',\'"+n.getUrl()+"\',\'"+n.getWebsite()+"\');";
-            stm.executeUpdate(query);
+            stm.execute(query);
         } catch (SQLException ex) {
-            System.out.println("Error in inserting");
+            ex.printStackTrace();
         }
     }
     

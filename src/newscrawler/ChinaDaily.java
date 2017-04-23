@@ -151,7 +151,6 @@ public class ChinaDaily {
              if(date.isEmpty()) return;
 //             System.out.println("saved----------------------");
              DBConnector con = new DBConnector();
-             con.dbConnection();
              con.insert(new News(title, news, date, childLink, "China Daily"));
              
          } catch (IOException ex) {

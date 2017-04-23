@@ -149,9 +149,8 @@ public class LATimes {
              String date = time.attr("data-dt");
              System.out.println(date);
 
-//             DBConnector con = new DBConnector();
-//             con.dbConnection();
-//             con.insert(new News(title, news, date, childLink, "LATimes"));
+             DBConnector con = new DBConnector();
+             con.insert(new News(title, news, date, childLink, "LATimes"));
              
          } catch (IOException ex) {
              ex.printStackTrace();

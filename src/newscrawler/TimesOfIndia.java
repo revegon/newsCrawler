@@ -150,7 +150,6 @@ public class TimesOfIndia {
 //             System.out.println(date);
 
              DBConnector con = new DBConnector();
-             con.dbConnection();
              con.insert(new News(title, news, date, childLink, "Times of India"));
              
          } catch (IOException ex) {
