@@ -62,9 +62,15 @@ public class DBConnector {
     }
     
     public void insert(News n) 
-    {
+    {       String news = n.getNews().replace("\'", "\\\'");
+            news = news.replace("\"", "\\\"");
+            
+            String title = n.getTitle().replace("\'", "\\\'");
+            title = title.replace("\"", "\\\"");
         try {
-            String query = "insert into allnews(title, news, date, url, website) values(\'"+n.getTitle()+"\',\'"+n.getNews()+"\',\'"+n.getDate()+"\',\'"+n.getUrl()+"\',\'"+n.getWebsite()+"\');";
+            String query = "insert into allnews (title, news, date, url, website) values(\'"+title+"\',\'"+news+"\',\'"+n.getDate()+"\',\'"+n.getUrl()+"\',\'"+n.getWebsite()+"\');";
+           System.out.println(query);
+    
             stm.execute(query);
         } catch (SQLException ex) {
             ex.printStackTrace();
