@@ -24,7 +24,7 @@ import org.jsoup.select.Elements;
  *
  * @author Xenon
  */
-public class LATimes {
+public class TimesOfIndia {
     
     private static final String USER_AGENT =
             "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.112 Safari/535.1";
@@ -95,13 +95,13 @@ public class LATimes {
             
 //            System.out.println(htmlDocument.html());
             
-            Elements linksOnPage = htmlDocument.select("div.trb_search_result");
+            Elements linksOnPage = htmlDocument.select("div.tab_content").select("ul").select("li.article");
             
             System.out.println("Found (" + linksOnPage.size() + ") links");
             
             
             for(Element link: linksOnPage){
-                Element atag = link.select("a.trb_search_result_title").first();
+                Element atag = link.select("a").first();
                 this.links.add(atag.absUrl("href"));
             }
             
@@ -137,21 +137,21 @@ public class LATimes {
              
 //             System.out.println;
             // get news
-             String news = htmlDocument.select("div.trb_ar_page").text();
+             String news = htmlDocument.select("div.Normal").text();
 //             System.out.println(news);
              
              //get title
-             String title = htmlDocument.select("header.trb_ar_h").text();
+             String title = htmlDocument.select("div.main-content").select("h1").text();
 //             System.out.println(title);
              
-             //get date
-             Element time = htmlDocument.select("div.trb_ar_dateline").first().select("time").first();
-             String date = time.attr("data-dt");
-             System.out.println(date);
+//             //get date
+             
+             String date = htmlDocument.select("div.main-content").select("span.time_cptn").text();
+//             System.out.println(date);
 
-//             DBConnector con = new DBConnector();
-//             con.dbConnection();
-//             con.insert(new News(title, news, date, childLink, "LATimes"));
+             DBConnector con = new DBConnector();
+             con.dbConnection();
+             con.insert(new News(title, news, date, childLink, "Times of India"));
              
          } catch (IOException ex) {
              ex.printStackTrace();

@@ -18,60 +18,29 @@ import java.util.logging.Logger;
  */
 public class Crawler {
     
-    private static final int MAX_PAGES_TO_SEARCH = 30;
-    private Set<String> pagesVisited = new HashSet<String>();
-    private List<String> pagesToVisit = new LinkedList<String>();
     
-    public void search(List<String> pagesToVisit){
-        
-        
-        while(!pagesToVisit.isEmpty()){
-            
-            String currentUrl = pagesToVisit.remove(0);
-//            CrawlConfig config = new CrawlConfig();
-            LATimes config = new LATimes();
-            
-            System.out.println("Crawling with parent link: " + currentUrl);
-            
-            config.crawlForLinks(currentUrl);
-            
-            this.pagesToVisit.addAll(config.getLinks());
-            
-            
-                
-                while(!this.pagesToVisit.isEmpty()){
-                
-                try {
-                    Thread.sleep(1000);
-                    
-                    String childLink = this.pagesToVisit.remove(0);
-                    System.out.println("Crawling with child link: " + childLink);
-                    
-                    config.crawlForNews(childLink);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Crawler.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-            
-            }
-            
-        }
-
-    }
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
          
-        Crawler crawler = new Crawler();
         
         List<String> pagesToVisit = new LinkedList<String>();
-                    
-                    pagesToVisit.add("http://www.latimes.com/search/dispatcher.front?target=all&spell=on&Query=bangladesh&date=04/16/2017-04/23/2017#trb_search");
-                    
-                    
-                    crawler.search(pagesToVisit);
+        
+        //LATimes
+//        pagesToVisit.add("http://www.latimes.com/search/dispatcher.front?target=all&spell=on&Query=bangladesh&date=04/16/2017-04/23/2017#trb_search");         
+//        LATimes lat = new LATimes();
+//        lat.search(pagesToVisit);
+//                    
+//        pagesToVisit.clear();
+        
+        //Times of India
+        pagesToVisit.add("http://timesofindia.indiatimes.com/topic/Bangladesh/news");
+        pagesToVisit.add("http://timesofindia.indiatimes.com/topic/Bangladesh/news/2");
+        TimesOfIndia toi = new TimesOfIndia();
+        toi.search(pagesToVisit);
+        pagesToVisit.clear();
     }
     
 }
