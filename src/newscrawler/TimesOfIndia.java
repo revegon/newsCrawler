@@ -150,7 +150,7 @@ public class TimesOfIndia {
              
              String date = htmlDocument.select("div.main-content").select("span.time_cptn").text();
 //             System.out.println(date);
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-DD HH:mm:ss");
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                  String cd = df.format(new Date());
              DBConnector con = new DBConnector();
              con.insert(new News(title, news, date, childLink, "Times of India", cd));

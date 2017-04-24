@@ -153,7 +153,7 @@ public class ChinaDaily {
              if(date.isEmpty()) return;
 //             System.out.println("saved----------------------");
              DBConnector con = new DBConnector();
-             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-DD HH:mm:ss");
+             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                  String cd = df.format(new Date());
              con.insert(new News(title, news, date, childLink, "China Daily", cd));
              

@@ -99,7 +99,7 @@ public class DBConnector {
                  String date = rs.getString("date");
                  String url = rs.getString("url");
                  String website = rs.getString("website");
-                 SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-DD HH:mm:ss");
+                 SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                  String cd = df.format(new Date());
                  News n = new News(id, title, news, date, url, website, cd);
                  list.add(n);

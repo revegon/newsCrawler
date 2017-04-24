@@ -151,7 +151,7 @@ public class LATimes {
              String date = time.attr("data-dt");
              System.out.println(date);
 
-             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-DD HH:mm:ss");
+             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                  String cd = df.format(new Date());
              DBConnector con = new DBConnector();
              con.insert(new News(title, news, date, childLink, "LATimes", cd));
