@@ -57,7 +57,7 @@ public class DBConnector {
     
     public void createTable() throws SQLException
     {
-        String query = "create table allnews(id int primary key AUTO_INCREMENT, title varchar(50000), news varchar(50000), date varchar(50000), url varchar(50000), website varchar(100));";
+        String query = "create table allnews(id int primary key AUTO_INCREMENT, title text, news text, date text, url text, website text);";
         stm.execute(query);
     }
     
@@ -69,7 +69,7 @@ public class DBConnector {
             title = title.replace("\"", "\\\"");
         try {
             String query = "insert into allnews (title, news, date, url, website) values(\'"+title+"\',\'"+news+"\',\'"+n.getDate()+"\',\'"+n.getUrl()+"\',\'"+n.getWebsite()+"\');";
-           System.out.println(query);
+//           System.out.println(query);
     
             stm.execute(query);
         } catch (SQLException ex) {
