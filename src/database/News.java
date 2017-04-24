@@ -17,23 +17,34 @@ public class News {
     private String date;
     private String url;
     private String website;
+    private String crawlDate;
 
-    public News(int id, String title, String news, String date, String url, String webSite) {
+    public News(int id, String title, String news, String date, String url, String webSite, String crawlDate) {
         this.id = id;
         this.title = title;
         this.news = news;
         this.date = date;
         this.url = url;
         this.website = webSite;
+        this.crawlDate = crawlDate;
     }
 
-    public News(String title, String news, String date, String url, String webSite) {
+    public News(String title, String news, String date, String url, String webSite, String crawlDate) {
         this.title = title;
         this.news = news;
         this.date = date;
         this.url = url;
         this.id = -1;
         this.website = webSite;
+        this.crawlDate = crawlDate;
+    }
+
+    public String getCrawlDate() {
+        return crawlDate;
+    }
+
+    public void setCrawlDate(String crawlDate) {
+        this.crawlDate = crawlDate;
     }
 
     public String getWebsite() {

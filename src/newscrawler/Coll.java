@@ -8,6 +8,8 @@ package newscrawler;
 import database.DBConnector;
 import database.News;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -148,9 +150,10 @@ public class Coll {
              
              String date = htmlDocument.select("div.main-content").select("span.time_cptn").text();
 //             System.out.println(date);
-
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-DD HH:mm:ss");
+                 String cd = df.format(new Date());
              DBConnector con = new DBConnector();
-             con.insert(new News(title, news, date, childLink, "Times of India"));
+             con.insert(new News(title, news, date, childLink, "Times of India", cd));
              
          } catch (IOException ex) {
              ex.printStackTrace();

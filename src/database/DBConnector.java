@@ -11,7 +11,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -57,7 +59,7 @@ public class DBConnector {
     
     public void createTable() throws SQLException
     {
-        String query = "create table allnews(id int primary key AUTO_INCREMENT, title text, news text, date text, url text, website text);";
+        String query = "create table allnews(id int primary key AUTO_INCREMENT, title text, news text, date text, url text, website text, crawlDate datetime);";
         stm.execute(query);
     }
     
@@ -68,7 +70,7 @@ public class DBConnector {
             String title = n.getTitle().replace("\'", "\\\'");
             title = title.replace("\"", "\\\"");
         try {
-            String query = "insert into allnews (title, news, date, url, website) values(\'"+title+"\',\'"+news+"\',\'"+n.getDate()+"\',\'"+n.getUrl()+"\',\'"+n.getWebsite()+"\');";
+            String query = "insert into allnews (title, news, date, url, website, crawlDate) values(\'"+title+"\',\'"+news+"\',\'"+n.getDate()+"\',\'"+n.getUrl()+"\',\'"+n.getWebsite()+"\',\'"+n.getCrawlDate()+"\');";
 //           System.out.println(query);
     
             stm.execute(query);
@@ -97,9 +99,10 @@ public class DBConnector {
                  String date = rs.getString("date");
                  String url = rs.getString("url");
                  String website = rs.getString("website");
-                 
-                 News n = new News(id, title, news, date, url, website);
-                 
+                 SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-DD HH:mm:ss");
+                 String cd = df.format(new Date());
+                 News n = new News(id, title, news, date, url, website, cd);
+                 list.add(n);
              }
          } catch (SQLException ex) {
              System.out.println("Error in retriving data");
@@ -122,8 +125,8 @@ public class DBConnector {
                  String date = rs.getString("date");
                  String url = rs.getString("url");
                  String website = rs.getString("website");
-                 
-                  n = new News(id, title, news, date, url, website);
+                 String cd = rs.getString("crawlDate");
+                  n = new News(id, title, news, date, url, website, cd);
          } catch (SQLException ex) {
              Logger.getLogger(DBConnector.class.getName()).log(Level.SEVERE, null, ex);
          }

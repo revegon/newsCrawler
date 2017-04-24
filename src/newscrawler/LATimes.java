@@ -8,6 +8,8 @@ package newscrawler;
 import database.DBConnector;
 import database.News;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -149,8 +151,10 @@ public class LATimes {
              String date = time.attr("data-dt");
              System.out.println(date);
 
+             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-DD HH:mm:ss");
+                 String cd = df.format(new Date());
              DBConnector con = new DBConnector();
-             con.insert(new News(title, news, date, childLink, "LATimes"));
+             con.insert(new News(title, news, date, childLink, "LATimes", cd));
              
          } catch (IOException ex) {
              ex.printStackTrace();
