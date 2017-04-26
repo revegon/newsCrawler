@@ -134,4 +134,15 @@ public class DBConnector {
              return n;
          }
     }
+    
+    public void removeDuplicate()
+    {
+        
+         try {
+             String query = "DELETE a FROM allnews as a, allnews as b WHERE a.crawlDate>b.crawlDate and a.url = b.url and a.date = b.date;";
+             stm.executeUpdate(query);
+         } catch (SQLException ex) {
+             Logger.getLogger(DBConnector.class.getName()).log(Level.SEVERE, null, ex);
+         }
+    }
 }

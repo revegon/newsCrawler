@@ -5,6 +5,7 @@
  */
 package newscrawler;
 
+import database.DBConnector;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -26,11 +27,26 @@ public class Crawler {
     public static void main(String[] args) {
          
         
-        List<String> pagesToVisit = new LinkedList<String>();
+       
+        crawl();
+        
+        //
+//        pagesToVisit.add("http://www.chicagotribune.com/search/dispatcher.front?page=1&target=stories&date=03%2F25%2F2017-04%2F24%2F2017&spell=on&Query=bangladesh");
+//        Coll c = new Coll();
+//        c.search(pagesToVisit);
+        
+
+//        DBConnector db = new DBConnector();
+        
+        
+    }
+
+    public static void crawl() {
+         List<String> pagesToVisit = new LinkedList<String>();
         
 //        //LATimes
         pagesToVisit.add("http://www.latimes.com/search/dispatcher.front?target=all&spell=on&Query=bangladesh&date=03/24/2017-04/23/2017#trb_search");  //month
-////        pagesToVisit.add("http://www.latimes.com/search/dispatcher.front?target=all&spell=on&Query=bangladesh&date=04/16/2017-04/23/2017#trb_search");         //week
+//       pagesToVisit.add("http://www.latimes.com/search/dispatcher.front?target=all&spell=on&Query=bangladesh&date=04/16/2017-04/23/2017#trb_search");         //week
         LATimes lat = new LATimes();
         lat.search(pagesToVisit);
         pagesToVisit.clear();
@@ -50,13 +66,16 @@ public class Crawler {
         pagesToVisit.clear();
         
         
+
+        //chicago tribunre
+        pagesToVisit.add("http://www.chicagotribune.com/search/dispatcher.front?page=1&target=stories&date=03%2F25%2F2017-04%2F24%2F2017&spell=on&Query=bangladesh");
+        pagesToVisit.add("http://www.chicagotribune.com/search/dispatcher.front?page=2&target=stories&date=03%2F25%2F2017-04%2F24%2F2017&spell=on&Query=bangladesh");
+        ChicagoTribune ct = new ChicagoTribune();
+        ct.search(pagesToVisit);
+        pagesToVisit.clear();
         
-        //
-//        pagesToVisit.add("http://www.independent.co.uk/indy100/article/map-shows-safest-countries-visit-uk-foreign-office-dangerous-travel-advice-7696931");
-//        Coll c = new Coll();
-//        c.search(pagesToVisit);
-        
-        
+//        DBConnector db = new DBConnector();
+//        db.removeDuplicate();
     }
     
 }
